@@ -1,0 +1,24 @@
+{
+  "name": "TradeDBCronJobs",
+  "version": "0.0.0",
+  "description": "Trade database utilities.",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CryptoMarketMonitor/TradeDBCronJobs.git"
+  },
+  "author": "Daniel Streit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CryptoMarketMonitor/TradeDBCronJobs/issues"
+  },
+  "homepage": "https://github.com/CryptoMarketMonitor/TradeDBCronJobs",
+  "dependencies": {
+    "bluebird": "^2.3.2",
+    "mongodb": "^1.4.10",
+    "mongoose": "^3.8.16"
+  }
+}
