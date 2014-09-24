@@ -1,6 +1,7 @@
 // This script will build out the computed values collection from
 // the trades database.
 var MongoClient = require('mongodb').MongoClient;
+var mongoUri = process.env.MONGO_WRITER_URI || require('./config').MONGO_WRITER_URI;
 
 var pipe = [];
 pipe.push({
@@ -97,23 +98,11 @@ var options = {
   allowDiskUse: true
 };
 
-var pipe2 = [];
-
-pipe2.push({
-  $group: {
-    _id: null,
-    average: { $avg: "$variance" },
-    high: { $max: "$variance" },
-    low: { $min: "$variance" },
-    values: { $push: "$variance" }
-  }
-});
-
 (function() {
 
   console.log('Starting build at', Date());
   // Connect to the db
-  MongoClient.connect(process.env.MONGO_WRITER_URI, function(error, db) {
+  MongoClient.connect(mongoUri, function(error, db) {
     if (error) console.error(error);
     console.log('successfully connected to db');
 
@@ -122,13 +111,8 @@ pipe2.push({
     trades.aggregate(pipe, options, function(error, results) {
       if (error) console.error(error);
       else console.log('Success');
+      db.close();
 
-      db.collection('computedValues').aggregate(pipe2, { out: 'VarianceData' }, function(error, results) {
-        if (error) console.error(error);
-        else console.log(results);
-
-        db.close();
-      });
     });
 
   });

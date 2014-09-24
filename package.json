@@ -18,6 +18,7 @@
   "homepage": "https://github.com/CryptoMarketMonitor/TradeDBCronJobs",
   "dependencies": {
     "bluebird": "^2.3.2",
+    "lodash": "^2.4.1",
     "mongodb": "^1.4.10",
     "mongoose": "^3.8.16"
   }

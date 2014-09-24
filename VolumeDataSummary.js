@@ -1,5 +1,6 @@
 
 var MongoClient = require('mongodb').MongoClient;
+var mongoUri = process.env.MONGO_WRITER_URI || require('./config').MONGO_WRITER_URI;
 
 var pipe = [];
 
@@ -15,7 +16,7 @@ pipe.push({
 
 (function() {
   console.log('Building volume data collection');
-  MongoClient.connect(process.env.MONGO_WRITER_URI, function(error, db) {
+  MongoClient.connect(mongoUri, function(error, db) {
     if (error) console.error(error);
     else console.log('Successfully connected to db');
     db
